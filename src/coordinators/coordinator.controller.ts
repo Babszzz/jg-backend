@@ -65,3 +65,19 @@ export const createMultipleCoordinators = async (
     res.status(500).json({ error: "Failed to create coordinators" });
   }
 };
+
+export const getOneCoordinator = async (req: Request, res: Response) => {
+  try {
+    const coordinator = await coordinatorService.getCoordinatorById(
+      req.params.id
+    );
+
+    if (!coordinator) {
+      return res.status(404).json({ error: "Coordinator not found" });
+    }
+
+    res.json(coordinator);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch coordinator" });
+  }
+};

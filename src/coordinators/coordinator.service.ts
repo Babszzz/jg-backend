@@ -48,3 +48,7 @@ export const fetchCoordinators = async (page = 1, limit = 10, search = "") => {
     totalItems: total,
   };
 };
+
+export const getCoordinatorById = async (id: string) => {
+  return Coordinator.findById(id);
+};
