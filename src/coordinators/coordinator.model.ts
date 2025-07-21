@@ -8,6 +8,7 @@ const coordinatorSchema = new mongoose.Schema(
     photoUrl: { type: String, required: true },
     availability: { type: Boolean, default: true },
     bio: { type: String, required: true },
+    unavailableDates: [{ type: Date }],
   },
   { timestamps: true }
 );

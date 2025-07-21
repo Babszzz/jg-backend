@@ -8,6 +8,7 @@ export const coordinatorSchema = z
     photoUrl: z.url("Photo must be a valid URL"),
     availability: z.boolean().optional(),
     bio: z.string().min(10, "Bio is required"),
+    unavailableDates: z.array(z.coerce.date()).optional(),
   })
   .strict();
 
