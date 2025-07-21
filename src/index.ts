@@ -6,7 +6,18 @@ import cors from "cors";
 
 const app = express();
 
-app.use(cors());
+const allowedOrigins = [
+  "https://jg-frontend-mauve.vercel.app",
+  "http://localhost:3500",
+];
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 
 connectDB();
