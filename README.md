@@ -19,7 +19,7 @@ This is the backend API for managing wedding coordinators and user bookings. It 
 ## 📦 Installation
 
 ```bash
-git clone https://github.com/your-username/wedding-coordinator-api.git
+git clone https://github.com/Babszzz/jg-backend.git
 cd wedding-coordinator-api
 yarn install
 # or
@@ -32,7 +32,7 @@ Create a .env file in the root and add the following:
 
 ```bash
 PORT=3501
-MONGO_URI=your_mongodb_connection_string
+MONGO_URI=your_own_mongodb_connection_string
 ```
 
 ## 🧪 Running the Server
