@@ -16,13 +16,19 @@ export const getCoordinators = async (req: Request, res: Response) => {
     );
 
     res.json({
-      data: result.coordinators,
-      currentPage: result.currentPage,
-      totalPages: result.totalPages,
-      totalItems: result.totalItems,
+      success: true,
+      message: "successful",
+      data: {
+        data: result.coordinators,
+        currentPage: result.currentPage,
+        totalPages: result.totalPages,
+        totalItems: result.totalItems,
+      },
     });
   } catch (error) {
-    res.status(500).json({ error: "Failed to fetch coordinators" });
+    res
+      .status(500)
+      .json({ success: false, message: "Failed to fetch coordinators" });
   }
 };
 
@@ -32,15 +38,17 @@ export const createCoordinator = async (req: Request, res: Response) => {
 
     if (!parsed.success) {
       return res.status(400).json({
-        error: "Validation failed",
+        message: "Validation failed",
         issues: parsed.error.issues,
       });
     }
 
     const saved = await coordinatorService.createCoordinator(parsed.data);
-    res.status(201).json(saved);
+    res.status(201).json({ success: true, message: "Successful", data: saved });
   } catch (err) {
-    res.status(500).json({ error: "Failed to create coordinator" });
+    res
+      .status(500)
+      .json({ success: false, message: "Failed to create coordinator" });
   }
 };
 
@@ -53,16 +61,19 @@ export const createMultipleCoordinators = async (
 
     if (!parsed.success) {
       return res.status(400).json({
-        error: "Validation failed",
+        success: false,
+        message: "Validation failed",
         issues: parsed.error.issues,
       });
     }
 
     const saved = await coordinatorService.createBulkCoordinator(parsed.data);
 
-    res.status(201).json(saved);
+    res.status(201).json({ success: true, message: "Successful", data: saved });
   } catch (err) {
-    res.status(500).json({ error: "Failed to create coordinators" });
+    res
+      .status(500)
+      .json({ success: false, message: "Failed to create coordinators" });
   }
 };
 
@@ -73,11 +84,17 @@ export const getOneCoordinator = async (req: Request, res: Response) => {
     );
 
     if (!coordinator) {
-      return res.status(404).json({ error: "Coordinator not found" });
+      return res
+        .status(404)
+        .json({ success: false, message: "Coordinator not found" });
     }
 
-    res.json(coordinator);
+    res
+      .status(200)
+      .json({ success: true, message: "Successful", data: coordinator });
   } catch (err) {
-    res.status(500).json({ error: "Failed to fetch coordinator" });
+    res
+      .status(500)
+      .json({ success: false, message: "Failed to fetch coordinator" });
   }
 };
